@@ -1,0 +1,179 @@
+{
+    "openapi":"3.0.0",
+    "info":{
+        "title":"Atlas",
+        "description": "Essa é uma documentação sobre a Atlas API.",
+        "version": "1.0.0",
+        "contact": {
+            "email":"jeffersonsouza.w2020@gmail.com"
+        }
+    },
+    "paths":{
+        "/users": {
+            "post":{
+                "tags":["Users"],
+                "summary": "Crie um novo usuário",
+                "description": "Crie um novo usuário",                
+                "requestBody": {
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "name":{
+                                        "type":"string"
+                                    },
+                                    "email":{
+                                        "type":"string"
+                                    }
+                                },
+                                "example":{
+                                    "name":"atlas user",
+                                    "email": "atlasuser@gmail.com"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "201":{
+                        "description":"Criado"
+                    },
+                    "400":{
+                        "description":"Usuário já existe."
+                    }
+                }
+            },
+            "get":{
+                "tags":["Users"],
+                "summary":"Retorna todos os usuários",
+                "description": "Retorna todos os usuários",
+                "parameters": [
+                    {  
+                  "name":"user_id",
+                  "in":"header",
+                  "description":"",
+                  "required":true,
+                  "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Sucess",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "items":{
+                                        "type":"object",
+                                        "properties":{
+                                            "name":{
+                                                "type":"string"
+                                            },
+                                            "email":{
+                                                "type":"string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description":"Nenhum usuário encontrado"
+                    }
+                }
+            }
+        },
+        "/users/{user_id}":{
+          "get":{
+            "tags":["Users"],
+                "summary":"Retorna um usuário especifico",
+                "description": "Retorna um usuário especifico",
+                "parameters": [
+                    {  
+                  "name":"user_id",
+                  "in":"path",
+                  "description":"",
+                  "required":true,
+                  "type":"string"
+                    }
+                ],
+                "responses":{
+                    "201":{
+                        "description":"Sucess",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "items":{
+                                        "type":"object",
+                                        "properties":{
+                                            "id":{
+                                                "type":"string"
+                                            },
+                                            "name":{
+                                                "type":"string"
+                                            },
+                                            "email":{
+                                                "type":"string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description":"Usuário não encontrado"
+                    }
+                }
+          }
+        },
+        "/users/{user_id}/admin":{
+            "patch":{
+              "tags":["Users"],
+                  "summary":"Tornar admin um usuário",
+                  "description": "Tornar admin um usuário",
+                  "parameters": [
+                      {  
+                    "name":"user_id",
+                    "in":"path",
+                    "description":"",
+                    "required":true,
+                    "type":"string"
+                      }
+                  ],
+                  "responses":{
+                    "201":{
+                        "description":"Sucess",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "items":{
+                                        "type":"object",
+                                        "properties":{
+                                            "id":{
+                                                "type":"string"
+                                            },
+                                            "name":{
+                                                "type":"string"
+                                            },
+                                            "email":{
+                                                "type":"string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description":"O Usuário não pode se tornar admin"
+                    }
+                }
+            }
+          }
+    }
+}
